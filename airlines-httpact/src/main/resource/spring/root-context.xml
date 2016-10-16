@@ -43,4 +43,7 @@
     <bean name="crewService"
           class="by.pvt.module4.services.CrewServiceImpl" />
 
+    <bean name="staffService"
+          class="by.pvt.module4.services.StaffServiceImpl" />
+
 </beans>

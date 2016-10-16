@@ -26,4 +26,12 @@
         <property name="serviceInterface"
                   value="by.pvt.module4.services.CrewService" />
     </bean>
+
+    <bean id="remoteStaffService"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="http://localhost:8080/remoting/StaffService" />
+        <property name="serviceInterface"
+                  value="by.pvt.module4.services.StaffService" />
+    </bean>
 </beans>
