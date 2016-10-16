@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="airlines-httpact:war">
-    <output-path>$PROJECT_DIR$/airlines-httpact/target</output-path>
-    <root id="archive" name="airlines-hhtpact-1.0.RELEASE.war">
-      <element id="artifact" artifact-name="airlines-httpact:war exploded" />
-    </root>
-  </artifact>
-</component>

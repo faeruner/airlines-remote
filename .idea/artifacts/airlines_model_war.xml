@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="airlines-model:war">
-    <output-path>$PROJECT_DIR$/airlines-model/target</output-path>
-    <root id="archive" name="airlines-model-1.0.RELEASE.war">
-      <element id="artifact" artifact-name="airlines-model:war exploded" />
-    </root>
-  </artifact>
-</component>
