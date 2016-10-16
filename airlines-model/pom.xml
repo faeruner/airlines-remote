@@ -12,11 +12,6 @@
     <artifactId>airlines-model</artifactId>
     <packaging>jar</packaging>
     <dependencies>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.192</version>
-        </dependency>
     </dependencies>
 
 </project>
