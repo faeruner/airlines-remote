@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>Spring НТТР Invoker Sample</display-name>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/root-context.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>airlineExporter</servlet-name>
+        <servlet-class>
+            org.springframework.web.context.support.HttpRequestHandlerServlet
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>airlineExporter</servlet-name>
+        <url-pattern>/remoting/AirlineService</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>userExporter</servlet-name>
+        <servlet-class>
+            org.springframework.web.context.support.HttpRequestHandlerServlet
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userExporter</servlet-name>
+        <url-pattern>/remoting/UserService</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>crewExporter</servlet-name>
+        <servlet-class>
+            org.springframework.web.context.support.HttpRequestHandlerServlet
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>crewExporter</servlet-name>
+        <url-pattern>/remoting/CrewService</url-pattern>
+    </servlet-mapping>
+</web-app>

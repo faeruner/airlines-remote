@@ -1,0 +1,20 @@
+<cas:mapping xmlns:cas="http://castor.exolab.org/">
+    <cas:class name="by.pvt.module4.model.Staff" identity="id">
+        <cas:map-to xml="staff"/>
+        <cas:field name="id" type="int" required="true">
+            <cas:bind-xml name="id" node="element"/>
+        </cas:field>
+        <cas:field name="name" type="string">
+            <cas:bind-xml name="name" node="element"/>
+        </cas:field>
+        <cas:field name="surname" type="string">
+            <cas:bind-xml name="surname" node="element"/>
+        </cas:field>
+        <cas:field name="member" type="by.pvt.module4.model.MemberType">
+            <cas:bind-xml name="member" node="element"/>
+        </cas:field>
+        <cas:field name="crews" type="by.pvt.module4.model.Crew" collection="arraylist">
+            <cas:bind-xml name="crew"/>
+        </cas:field>
+    </cas:class>
+</cas:mapping>

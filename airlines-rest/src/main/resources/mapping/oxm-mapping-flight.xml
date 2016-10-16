@@ -1,0 +1,35 @@
+<cas:mapping xmlns:cas="http://castor.exolab.org/">
+    <cas:class name="by.pvt.module4.model.Flight" identity="id">
+        <cas:map-to xml="flight"/>
+        <cas:field name="id" type="int" required="true">
+            <cas:bind-xml name="id" node="element"/>
+        </cas:field>
+        <cas:field name="code" type="string">
+            <cas:bind-xml name="code" node="element"/>
+        </cas:field>
+        <cas:field name="depDate" type="string" handler="dateHandler">
+            <cas:bind-xml name="depDate" node="element"/>
+        </cas:field>
+        <cas:field name="returnDate" type="string" handler="dateHandler">
+            <cas:bind-xml name="returnDate" node="element"/>
+        </cas:field>
+        <cas:field name="createDate" type="string" handler="dateHandler">
+            <cas:bind-xml name="createDate" node="element"/>
+        </cas:field>
+        <cas:field name="arrival" type="by.pvt.module4.model.Airport">
+            <cas:bind-xml name="arrival" node="element"/>
+        </cas:field>
+        <cas:field name="departure" type="by.pvt.module4.model.Airport">
+            <cas:bind-xml name="departure" node="element"/>
+        </cas:field>
+        <cas:field name="airline" type="by.pvt.module4.model.Airline">
+            <cas:bind-xml name="airline" node="element"/>
+        </cas:field>
+        <cas:field name="crew" type="by.pvt.module4.model.Crew">
+            <cas:bind-xml name="crew" node="element"/>
+        </cas:field>
+        <cas:field name="user" type="by.pvt.module4.model.User">
+            <cas:bind-xml name="user" node="element"/>
+        </cas:field>
+    </cas:class>
+</cas:mapping>

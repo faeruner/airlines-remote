@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="remoteAirlineService"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="http://localhost:8080/remoting/AirlineService" />
+        <property name="serviceInterface"
+                  value="by.pvt.module4.services.AirlineService" />
+    </bean>
+
+    <bean id="remoteUserService"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="http://localhost:8080/remoting/UserService" />
+        <property name="serviceInterface"
+                  value="by.pvt.module4.services.UserService" />
+    </bean>
+
+    <bean id="remoteCrewService"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="http://localhost:8080/remoting/CrewService" />
+        <property name="serviceInterface"
+                  value="by.pvt.module4.services.CrewService" />
+    </bean>
+</beans>

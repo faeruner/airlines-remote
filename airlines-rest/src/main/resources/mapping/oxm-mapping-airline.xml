@@ -1,0 +1,11 @@
+<cas:mapping xmlns:cas="http://castor.exolab.org/">
+    <cas:class name="by.pvt.module4.model.Airline" identity="id">
+        <cas:map-to xml="airline"/>
+        <cas:field name="id" type="int" required="true">
+            <cas:bind-xml name="id" node="element"/>
+        </cas:field>
+        <cas:field name="name" type="string">
+            <cas:bind-xml name="name" node="element"/>
+        </cas:field>
+    </cas:class>
+</cas:mapping>
