@@ -1,4 +1,9 @@
 <cas:mapping xmlns:cas="http://castor.exolab.org/">
+    <cas:class name="by.pvt.module4.model.Airlines">
+        <cas:field name="airlines" type="by.pvt.module4.model.Airline" collection="arraylist">
+            <cas:bind-xml name="airline"/>
+        </cas:field>
+    </cas:class>
     <cas:class name="by.pvt.module4.model.Airline" identity="id">
         <cas:map-to xml="airline"/>
         <cas:field name="id" type="int" required="true">

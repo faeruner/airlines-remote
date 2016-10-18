@@ -1,17 +1,13 @@
 package by.pvt.module4.controller;
 
 import by.pvt.module4.common.CommonController;
-import by.pvt.module4.common.CommonService;
 import by.pvt.module4.model.Airline;
-import by.pvt.module4.services.UserService;
+import by.pvt.module4.model.Airlines;
+import by.pvt.module4.services.AirlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Map;
 
 @Controller
@@ -19,39 +15,50 @@ import java.util.Map;
 public class AirlineController extends CommonController<Airline> {
 
     @Autowired
-    public AirlineController(UserService userService, CommonService<Airline> commonService) {
-        super("path.page.edit_airline", "path.page.airlines", userService, commonService);
+    private AirlineService airlineService;
+
+    @RequestMapping(value = "/listdata", method = RequestMethod.GET)
+    @ResponseBody
+    public Airlines listData() {
+        return new Airlines(airlineService.findAll());
     }
 
-    @RequestMapping
-    public String perform(@RequestParam Map<String, String> paramMap, Model model) {
-        model.addAttribute(ENTITY, updateEntity(findOne(paramMap, model), paramMap));
-        return getPage(paramMap, model);
+    @RequestMapping(value = "/pagedata", method = RequestMethod.GET)
+    @ResponseBody
+    public Airlines pageData(@RequestParam Map<String, String> paramMap) {
+        return new Airlines(findPage(paramMap, airlineService));
     }
 
-    @RequestMapping("/validate")
-    public String validate(@RequestParam Map<String, String> paramMap, Model model, HttpServletResponse response) {
-        if (paramMap.containsKey(Airline.NAME)) {
-            String name = paramMap.get(Airline.NAME).trim();
-            if (!name.toLowerCase().contains("airline")) {
-                try {
-                    response.setContentType("text/html;charset=UTF-8");
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                    //model.addAttribute("msg_wrong_name", "ошибка в имени");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        model.addAttribute(ENTITY, updateEntity(findOne(paramMap, model), paramMap));
-        return getEditPage(paramMap, model);
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Airline findAirlineOne(@PathVariable Integer id) {
+        return airlineService.findOne(id);
     }
 
-    private Airline updateEntity(Airline airline, Map<String, String> paramMap) {
-        if (airline == null)
-            airline = new Airline();
-        if (paramMap.containsKey(Airline.NAME))
-            airline.setName(paramMap.get(Airline.NAME).trim());
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @ResponseBody
+    public Airline create(@RequestBody Airline airline) {
+        log.info("Creating airline: " + airline);
+        airlineService.save(airline);
+        log.info("Airline created successfully with info: " + airline);
         return airline;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public void update(@RequestBody Airline airline,
+                       @PathVariable Integer id) {
+        log.info("Updating airline: " + airline);
+        airlineService.save(airline);
+        log.info("Airline updated successfully with info: " + airline);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void delete(@PathVariable Integer id) {
+        log.info("Deleting contact with id: " + id);
+        Airline airline = airlineService.findOne(id);
+        airlineService.delete(airline);
+        log.info("Airline deleted successfully");
     }
 }
