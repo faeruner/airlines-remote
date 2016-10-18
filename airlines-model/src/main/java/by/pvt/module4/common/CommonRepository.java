@@ -1,6 +1,6 @@
 package by.pvt.module4.common;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface CommonRepository<T extends Fact> extends CrudRepository<T, Integer> {
+public interface CommonRepository<T extends Fact> extends PagingAndSortingRepository<T, Integer> {
 }

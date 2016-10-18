@@ -43,4 +43,14 @@
         <servlet-name>crewExporter</servlet-name>
         <url-pattern>/remoting/CrewService</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>staffExporter</servlet-name>
+        <servlet-class>
+            org.springframework.web.context.support.HttpRequestHandlerServlet
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>staffExporter</servlet-name>
+        <url-pattern>/remoting/StaffService</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -2,11 +2,12 @@ package by.pvt.module4.common;
 
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -17,12 +18,12 @@ public abstract class CommonServiceImpl<T extends Fact> implements CommonService
     protected CommonRepository<T> commonRepository;
 
     @Override
-    public T findById(Integer id) {
-        return findById(id, true);
+    public T findOne(Integer id) {
+        return findOne(id, true);
     }
 
     @Override
-    public T findById(Integer id, Boolean full) {
+    public T findOne(Integer id, Boolean full) {
         return commonRepository.findOne(id);
     }
 
@@ -39,13 +40,13 @@ public abstract class CommonServiceImpl<T extends Fact> implements CommonService
     }
 
     @Override
-    public List<T> findPage(Integer page, Integer size) {
-        return findPage(page, size, true);
+    public Page<T> findPage(Pageable page) {
+        return findPage(page, true);
     }
 
     @Override
-    public List<T> findPage(Integer page, Integer size, Boolean full) {
-        return null;
+    public Page<T> findPage(Pageable page, Boolean full) {
+        return commonRepository.findAll(page);
     }
 
     @Override
@@ -60,11 +61,17 @@ public abstract class CommonServiceImpl<T extends Fact> implements CommonService
 
     @Override
     public List<Integer> getPageNumbers(Integer size) {
-        return null;
+        Long count = commonRepository.count();
+        List<Integer> listPages = new ArrayList<Integer>();
+        for (int i = 1; count > 0; i++) {
+            listPages.add(i);
+            count -= size;
+        }
+        return listPages;
     }
 
     @Override
     public Long getInsertPageNum(Integer size) {
-        return null;
+        return commonRepository.count() / size + 1;
     }
 }

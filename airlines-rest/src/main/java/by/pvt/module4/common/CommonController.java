@@ -1,13 +1,12 @@
 package by.pvt.module4.common;
 
-import by.pvt.module4.common.Fact;
-import by.pvt.module4.common.CommonService;
 import by.pvt.module4.model.User;
 import by.pvt.module4.services.UserService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -107,12 +106,12 @@ public abstract class CommonController<T extends Fact> {
         return fillModelPage(paramMap, model);
     }
 
-    protected T findById(Map<String, String> paramMap, Model model) {
+    protected T findOne(Map<String, String> paramMap, Model model) {
         T entity = null;
         Integer id = getParamIntDef(paramMap, ID, -1);
         if (id > 0)
             try {
-                entity = commonService.findById(id);
+                entity = commonService.findOne(id);
             } catch (Exception e) {
                 handleException(e, model);
             }
@@ -133,7 +132,7 @@ public abstract class CommonController<T extends Fact> {
     private String delete(Map<String, String> paramMap, Model model) {
         try {
 
-            commonService.delete(commonService.findById(getParamIntDef(paramMap, ID, -1)));
+            commonService.delete(commonService.findOne(getParamIntDef(paramMap, ID, -1)));
         } catch (Exception e) {
             handleException(e, model);
         }
@@ -206,7 +205,7 @@ public abstract class CommonController<T extends Fact> {
         }
 
         try {
-            return commonService.findPage(page, PAGE_SIZE);
+            return commonService.findPage(new PageRequest(page, PAGE_SIZE)).getContent();
         } catch (Exception e) {
             handleException(e, model);
         }

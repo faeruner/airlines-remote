@@ -7,10 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>airlines-hhtpact</artifactId>
+    <artifactId>airlines-httpact</artifactId>
     <packaging>war</packaging>
 
-    <name>airlines-hhtpact</name>
+    <name>airlines-httpact</name>
     <url>http://maven.apache.org</url>
 
 

@@ -43,6 +43,13 @@
     <bean name="crewService"
           class="by.pvt.module4.services.CrewServiceImpl" />
 
+    <bean name="staffExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="staffService"/>
+        <property name="serviceInterface"
+                  value="by.pvt.module4.services.StaffService"/>
+    </bean>
+
     <bean name="staffService"
           class="by.pvt.module4.services.StaffServiceImpl" />
 

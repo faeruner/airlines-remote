@@ -1,21 +1,18 @@
 package by.pvt.module4.controller;
 
 import by.pvt.module4.common.CommonController;
+import by.pvt.module4.common.CommonService;
 import by.pvt.module4.model.Airline;
 import by.pvt.module4.services.UserService;
-import by.pvt.module4.common.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
-
-import static org.hibernate.usertype.DynamicParameterizedType.ENTITY;
 
 @Controller
 @RequestMapping(value = "/airline")
@@ -28,7 +25,7 @@ public class AirlineController extends CommonController<Airline> {
 
     @RequestMapping
     public String perform(@RequestParam Map<String, String> paramMap, Model model) {
-        model.addAttribute(ENTITY, updateEntity(findById(paramMap, model), paramMap));
+        model.addAttribute(ENTITY, updateEntity(findOne(paramMap, model), paramMap));
         return getPage(paramMap, model);
     }
 
@@ -46,7 +43,7 @@ public class AirlineController extends CommonController<Airline> {
                 }
             }
         }
-        model.addAttribute(ENTITY, updateEntity(findById(paramMap, model), paramMap));
+        model.addAttribute(ENTITY, updateEntity(findOne(paramMap, model), paramMap));
         return getEditPage(paramMap, model);
     }
 
