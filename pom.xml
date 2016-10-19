@@ -210,7 +210,7 @@
 
     <modules>
         <module>airlines-model</module>
-        <module>airlines-httpact</module>
+        <module>airlines-webservices</module>
         <module>airlines-httpact-client</module>
         <module>airlines-service</module>
         <module>airlines-rest</module>

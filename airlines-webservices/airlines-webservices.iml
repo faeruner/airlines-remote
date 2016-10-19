@@ -18,7 +18,7 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/resources/spring/root-context.xml</file>
+          <file>file://$MODULE_DIR$/../airlines-httpact/src/main/resources/spring/root-context.xml</file>
           <file>file://$MODULE_DIR$/../airlines-service/src/main/resources/spring/datasource.xml</file>
           <file>file://$MODULE_DIR$/../airlines-service/src/main/resources/spring/service-tx-jpa.xml</file>
           <file>file://$MODULE_DIR$/../airlines-rest/src/main/resources/spring/rest-context.xml</file>
@@ -33,8 +33,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/${project.build.directory}/classes" />
-      <excludeFolder url="file://$MODULE_DIR$/${project.build.directory}/test-classes" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
