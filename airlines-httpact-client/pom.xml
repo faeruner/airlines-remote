@@ -34,5 +34,10 @@
             <artifactId>airlines-service</artifactId>
             <version>1.0.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>by.pvt.module4</groupId>
+            <artifactId>airlines-rest</artifactId>
+            <version>1.0.RELEASE</version>
+        </dependency>
     </dependencies>
 </project>
