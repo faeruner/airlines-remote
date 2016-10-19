@@ -18,9 +18,10 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/resource/spring/datasource.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resource/spring/root-context.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resource/spring/service-tx-jpa.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/root-context.xml</file>
+          <file>file://$MODULE_DIR$/../airlines-service/src/main/resources/spring/datasource.xml</file>
+          <file>file://$MODULE_DIR$/../airlines-service/src/main/resources/spring/service-tx-jpa.xml</file>
+          <file>file://$MODULE_DIR$/../airlines-rest/src/main/resources/spring/rest-context.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -57,8 +58,8 @@
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.castor:castor-xml:1.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-mapper-lgpl:1.9.13" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.4" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:4.1.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:4.1.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.3" level="project" />
@@ -67,6 +68,8 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.39" level="project" />
     <orderEntry type="library" name="Maven: com.h2database:h2:1.4.192" level="project" />
+    <orderEntry type="module" module-name="airlines-rest" />
+    <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.3.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.3.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.3.RELEASE" level="project" />
