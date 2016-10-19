@@ -18,8 +18,8 @@
         <cas:field name="member" type="by.pvt.module4.model.MemberType">
             <cas:bind-xml name="member" node="element"/>
         </cas:field>
-        <cas:field name="crews" type="by.pvt.module4.model.Crew" collection="arraylist">
-            <cas:bind-xml name="crew"/>
-        </cas:field>
+        <!--<cas:field name="crews" type="by.pvt.module4.model.Crews" collection="set">-->
+        <!--<cas:bind-xml name="crew"/>-->
+        <!--</cas:field>-->
     </cas:class>
 </cas:mapping>

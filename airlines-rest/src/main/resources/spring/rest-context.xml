@@ -25,7 +25,6 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
     <context:component-scan base-package="by.pvt.module4.controller"/>
-    <context:component-scan base-package="by.pvt.module4.services"/>
     <bean id="castorMarshaller"
           class="org.springframework.oxm.castor.CastorMarshaller">
         <property name="mappingLocation"
