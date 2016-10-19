@@ -4,7 +4,6 @@ import by.pvt.module4.common.Fact;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,7 +31,7 @@ public class Crew implements Serializable, Fact {
     @JoinColumn(name = USER_ID, nullable = false)
     private User user;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "member"
             , joinColumns = {@JoinColumn(name = CREW_ID)}
             , inverseJoinColumns = {@JoinColumn(name = STAFF_ID)})

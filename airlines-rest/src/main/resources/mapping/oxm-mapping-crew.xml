@@ -19,7 +19,7 @@
             <cas:bind-xml name="user" node="element"/>
         </cas:field>
         <cas:field name="members" type="by.pvt.module4.model.StaffList" collection="set">
-            <cas:bind-xml name="staff"/>
+            <cas:bind-xml name="staffItem" node="element"/>
         </cas:field>
     </cas:class>
 </cas:mapping>

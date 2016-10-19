@@ -1,12 +1,9 @@
 package by.pvt.module4.model;
 
-
 import by.pvt.module4.common.Fact;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class Staff implements Serializable, Fact {
@@ -25,8 +22,10 @@ public class Staff implements Serializable, Fact {
     @ManyToOne
     @JoinColumn(name = MEMBER_TYPE_ID)
     private MemberType member;
-    @ManyToMany(mappedBy = "members")
-    private Set<Crew> crews = new HashSet<Crew>();
+//    @Transient
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+//            mappedBy = "members")
+//    private Set<Crew> crews = new HashSet<Crew>();
 
 
     public Integer getId() {
@@ -86,13 +85,13 @@ public class Staff implements Serializable, Fact {
         return true;
     }
 
-    public Set<Crew> getCrews() {
-        return crews;
-    }
+//    public Set<Crew> getCrews() {
+//        return crews;
+//    }
 
-    public void setCrews(Set<Crew> crews) {
-        this.crews = crews;
-    }
+//    public void setCrews(Set<Crew> crews) {
+//        this.crews = crews;
+//    }
 
     @Override
     public String toString() {
@@ -106,12 +105,12 @@ public class Staff implements Serializable, Fact {
         } catch (Exception e) {
             str.append('{' + e.getMessage() + '}');
         }
-        str.append(", crews=");
-        try {
-            str.append(crews);
-        } catch (Exception e) {
-            str.append('{' + e.getMessage() + '}');
-        }
+//        str.append(", crews=");
+//        try {
+//            str.append(crews);
+//        } catch (Exception e) {
+//            str.append('{' + e.getMessage() + '}');
+//        }
         str.append('}');
         return str.toString();
     }
