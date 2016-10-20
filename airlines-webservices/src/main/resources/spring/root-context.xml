@@ -12,6 +12,7 @@
     <context:component-scan base-package="by.pvt.module4.services"/>
 
     <import resource="service-tx-jpa.xml"/>
+    <import resource="rest-security.xml"/>
     <!--<import resource="rest-context.xml"/>-->
 
     <bean name="airlineExporter"

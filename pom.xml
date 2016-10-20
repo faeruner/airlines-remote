@@ -214,6 +214,7 @@
         <module>airlines-httpact-client</module>
         <module>airlines-service</module>
         <module>airlines-rest</module>
+        <module>airlines-webapp</module>
     </modules>
 
     <build>

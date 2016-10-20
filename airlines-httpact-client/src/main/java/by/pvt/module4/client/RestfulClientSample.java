@@ -51,7 +51,7 @@ public class RestfulClientSample {
         crewNew.getUser().setName("John");
         crewNew.getUser().setSurname("Doe");
         System.out.println("Testing update crew by id: ");
-        restTemplate.put(URL_UPDATE_CREW, crewNew, crewNew.getId());
+        restTemplate.put(URL_UPDATE_CREW, crew, crew.getId());
         System.out.println("Crew update successfully: " + crewNew);
         System.out.println("");
 

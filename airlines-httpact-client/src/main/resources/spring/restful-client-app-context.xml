@@ -6,6 +6,7 @@
 
     <bean id="restTemplate"
           class="org.springframework.web.client.RestTemplate">
+        <constructor-arg ref="httpRequestFactory"/>
         <property name="messageConverters">
             <list>
                 <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
@@ -26,6 +27,25 @@
     <bean id="castorMarshaller"
           class="org.springframework.oxm.castor.CastorMarshaller">
         <property name="mappingLocations"
-                  value="classpath:/mapping/oxm-mapping.xml"/>
+                  value="classpath:oxm-mapping.xml"/>
+    </bean>
+    <bean id="httpRequestFactory"
+          class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory">
+        <constructor-arg>
+            <bean class="org.apache.http.impl.client.CloseableHttpClient"
+                  factory-bean="httpClientBuilder" factory-method="build"/>
+        </constructor-arg>
+    </bean>
+    <bean class="org.apache.http.impl.client.HttpClientBuilder" id="httpClientBuilder">
+        <property name="defaultCredentialsProvider">
+            <bean class="by.pvt.module4.client.CustomCredentialsProvider">
+                <property name="credentials">
+                    <bean class="org.apache.http.auth.UsernamePasswordCredentials">
+                        <constructor-arg name="userName" value="remote"/>
+                        <constructor-arg name="password" value="remote"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
     </bean>
 </beans>
