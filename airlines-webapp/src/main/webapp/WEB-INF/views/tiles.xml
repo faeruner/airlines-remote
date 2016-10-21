@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="default">
+        <put-attribute name="title" value="The Manager of Schedule Flights (c)"/>
+        <put-attribute name="subtitle" value="V.Dombrovsky, ПВТ, 2016"/>
+        <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp"/>
+        <put-attribute name="params" value=""/>
+        <put-attribute name="page-fields" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp"/>
+    </definition>
+
+    <definition name="frame-list" extends="default" template="/WEB-INF/views/tiles/layouts/frame-list.jsp"/>
+    <definition name="frame-edit" extends="default" template="/WEB-INF/views/tiles/layouts/frame-edit.jsp"/>
+    <definition name="login" extends="default" template="/WEB-INF/views/tiles/layouts/login.jsp"/>
+    <definition name="access_denied" extends="login"/>
+
+    <definition name="airline-list" extends="frame-list">
+        <put-attribute name="params" value="/WEB-INF/views/pages/airline-params.jsp"/>
+        <put-attribute name="page-fields" value="/WEB-INF/views/pages/airline-fields-list.jsp"/>
+    </definition>
+    <definition name="airline-edit" extends="frame-edit">
+        <put-attribute name="params" value="/WEB-INF/views/pages/airline-params.jsp"/>
+        <put-attribute name="page-fields" value="/WEB-INF/views/pages/airline-fields-edit.jsp"/>
+    </definition>
+
+    <definition name="airport-list" extends="frame-list">
+        <put-attribute name="params" value="/WEB-INF/views/pages/airport-params.jsp"/>
+        <put-attribute name="page-fields" value="/WEB-INF/views/pages/airport-fields-list.jsp"/>
+    </definition>
+    <definition name="airport-edit" extends="frame-edit">
+        <put-attribute name="params" value="/WEB-INF/views/pages/airport-params.jsp"/>
+        <put-attribute name="page-fields" value="/WEB-INF/views/pages/airport-fields-edit.jsp"/>
+    </definition>
+
+    <definition name="crew-list" extends="frame-list">
+        <put-attribute name="params" value="/WEB-INF/views/pages/crew-params.jsp"/>
+        <put-attribute name="page-fields" value="/WEB-INF/views/pages/crew-fields-list.jsp"/>
+    </definition>
+    <definition name="crew-edit" extends="frame-edit">
+        <put-attribute name="params" value="/WEB-INF/views/pages/crew-params.jsp"/>
+        <put-attribute name="advanced-edit" value="/WEB-INF/views/pages/member-fields-edit.jsp"/>
+        <put-attribute name="page-fields" value="/WEB-INF/views/pages/crew-fields-edit.jsp"/>
+    </definition>
+
+    <definition name="flight-list" extends="frame-list">
+        <put-attribute name="params" value="/WEB-INF/views/pages/flight-params.jsp"/>
+        <put-attribute name="page-fields" value="/WEB-INF/views/pages/flight-fields-list.jsp"/>
+    </definition>
+    <definition name="flight-edit" extends="frame-edit">
+        <put-attribute name="params" value="/WEB-INF/views/pages/flight-params.jsp"/>
+        <put-attribute name="page-fields" value="/WEB-INF/views/pages/flight-fields-edit.jsp"/>
+    </definition>
+
+    <definition name="staff-list" extends="frame-list">
+        <put-attribute name="params" value="/WEB-INF/views/pages/staff-params.jsp"/>
+        <put-attribute name="page-fields" value="/WEB-INF/views/pages/staff-fields-list.jsp"/>
+    </definition>
+    <definition name="staff-edit" extends="frame-edit">
+        <put-attribute name="params" value="/WEB-INF/views/pages/staff-params.jsp"/>
+        <put-attribute name="page-fields" value="/WEB-INF/views/pages/staff-fields-edit.jsp"/>
+    </definition>
+
+    <definition name="user-list" extends="frame-list">
+        <put-attribute name="params" value="/WEB-INF/views/pages/user-params.jsp"/>
+        <put-attribute name="page-fields" value="/WEB-INF/views/pages/user-fields-list.jsp"/>
+    </definition>
+    <definition name="user-edit" extends="frame-edit">
+        <put-attribute name="params" value="/WEB-INF/views/pages/user-params.jsp"/>
+        <put-attribute name="page-fields" value="/WEB-INF/views/pages/user-fields-edit.jsp"/>
+    </definition>
+
+</tiles-definitions>

@@ -1,23 +1,24 @@
 package by.pvt.module4.model;
 
-import java.io.Serializable;
+import by.pvt.module4.common.CommonEntityListImpl;
+
 import java.util.List;
 
-public class Users implements Serializable {
-    List<User> users;
+public class Users extends CommonEntityListImpl<User> {
 
     public Users() {
+        super();
     }
 
     public Users(List<User> users) {
-        this.users = users;
+        super(users);
     }
 
     public List<User> getUsers() {
-        return users;
+        return getEntity();
     }
 
     public void setUsers(List<User> users) {
-        this.users = users;
+        setEntity(users);
     }
 }

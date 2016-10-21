@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security-4.1.xsd">
+
+    <http auto-config="true">
+        <intercept-url pattern="/" access="permitAll"/>
+        <intercept-url pattern="/controller/airline**" access="hasRole('ROLE_ADMINISTRATOR')"/>
+        <intercept-url pattern="/controller/airport**" access="hasRole('ROLE_ADMINISTRATOR')"/>
+        <intercept-url pattern="/controller/flight**" access="hasRole('ROLE_ADMINISTRATOR')"/>
+        <intercept-url pattern="/controller/user**" access="hasRole('ROLE_ADMINISTRATOR')"/>
+        <intercept-url pattern="/controller/crew**" access="hasRole('ROLE_DISPATCHER')"/>
+        <intercept-url pattern="/controller/staff**" access="hasRole('ROLE_DISPATCHER')"/>
+        <form-login login-page="/login"
+                    username-parameter="login"
+                    password-parameter="password"
+                    authentication-failure-url="/access_denied"
+                    authentication-success-forward-url="/login"
+                    authentication-failure-forward-url="/access_denied"
+        />
+        <csrf/>
+    </http>
+    <authentication-manager>
+        <authentication-provider user-service-ref="authService"/>
+    </authentication-manager>
+    <beans:bean id="authService" class="by.pvt.module3.auth.AuthenticationService"/>
+</beans:beans>

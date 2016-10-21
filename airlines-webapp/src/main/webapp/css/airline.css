@@ -1,0 +1,7 @@
+@import "bootstrap.css";
+@import "bootstrap-theme.css";
+
+.panel-primary > .panel-footer-custom {
+    background: #f5f5f5;
+    color: #000;
+}

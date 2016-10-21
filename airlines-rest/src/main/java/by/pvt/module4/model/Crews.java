@@ -1,24 +1,25 @@
 package by.pvt.module4.model;
 
-import java.io.Serializable;
+import by.pvt.module4.common.CommonEntityListImpl;
+
 import java.util.List;
 
-public class Crews implements Serializable {
-    List<Crew> crews;
+public class Crews extends CommonEntityListImpl<Crew> {
 
     public Crews() {
+        super();
     }
 
     public Crews(List<Crew> crews) {
-        this.crews = crews;
+        super(crews);
     }
 
     public List<Crew> getCrews() {
-        return crews;
+        return getEntity();
     }
 
     public void setCrews(List<Crew> crews) {
-        this.crews = crews;
+        setEntity(crews);
     }
 }
 

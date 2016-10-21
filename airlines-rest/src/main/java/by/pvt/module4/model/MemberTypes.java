@@ -1,23 +1,24 @@
 package by.pvt.module4.model;
 
-import java.io.Serializable;
+import by.pvt.module4.common.CommonEntityListImpl;
+
 import java.util.List;
 
-public class MemberTypes implements Serializable {
-    List<MemberType> memberTypes;
+public class MemberTypes extends CommonEntityListImpl<MemberType> {
 
     public MemberTypes() {
+        super();
     }
 
     public MemberTypes(List<MemberType> memberTypes) {
-        this.memberTypes = memberTypes;
+        super(memberTypes);
     }
 
     public List<MemberType> getMemberTypes() {
-        return memberTypes;
+        return getEntity();
     }
 
     public void setMemberTypes(List<MemberType> memberTypes) {
-        this.memberTypes = memberTypes;
+        setEntity(memberTypes);
     }
 }

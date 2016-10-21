@@ -1,23 +1,23 @@
 package by.pvt.module4.model;
 
-import java.io.Serializable;
+import by.pvt.module4.common.CommonEntityListImpl;
+
 import java.util.List;
 
-public class StaffList implements Serializable {
-    List<Staff> staffList;
-
+public class StaffList extends CommonEntityListImpl<Staff> {
     public StaffList() {
+        super();
     }
 
     public StaffList(List<Staff> staffList) {
-        this.staffList = staffList;
+        super(staffList);
     }
 
     public List<Staff> getStaffList() {
-        return staffList;
+        return getEntity();
     }
 
     public void setStaffList(List<Staff> staffList) {
-        this.staffList = staffList;
+        setEntity(staffList);
     }
 }

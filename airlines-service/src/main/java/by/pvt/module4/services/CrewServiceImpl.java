@@ -5,12 +5,10 @@ import by.pvt.module4.model.Crew;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service("crewService")
-@Transactional(readOnly = true)
 public class CrewServiceImpl extends CommonServiceImpl<Crew> implements CrewService {
 
     @Override

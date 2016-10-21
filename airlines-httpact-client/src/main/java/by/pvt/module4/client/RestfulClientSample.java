@@ -26,7 +26,7 @@ public class RestfulClientSample {
 
         System.out.println("Testing retrieve all crews: ");
         Crews crews = restTemplate.getForObject(URL_GET_ALL_CREWS, Crews.class);
-        listEntity(crews.getCrews());
+        listEntity(crews.getEntity());
         System.out.println("");
 
         System.out.println("Testing retrieve а crew by id: ");
@@ -51,14 +51,14 @@ public class RestfulClientSample {
         crewNew.getUser().setName("John");
         crewNew.getUser().setSurname("Doe");
         System.out.println("Testing update crew by id: ");
-        restTemplate.put(URL_UPDATE_CREW, crew, crew.getId());
+        restTemplate.put(URL_UPDATE_CREW, crewNew, crewNew.getId());
         System.out.println("Crew update successfully: " + crewNew);
         System.out.println("");
 
         restTemplate.delete(URL_DELETE_CREW, crewNew.getId());
         System.out.println("Testing delete crew by id: ");
         crews = restTemplate.getForObject(URL_GET_ALL_CREWS, Crews.class);
-        listEntity(crews.getCrews());
+        listEntity(crews.getEntity());
     }
 
     private static <T> void listEntity(Collection<T> entities) {
