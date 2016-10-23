@@ -46,8 +46,7 @@ public class CrewController extends CommonController<Crew> {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public void update(@RequestBody Crew crew,
-                       @PathVariable Integer id) {
+    public void update(@RequestBody Crew crew,                       @PathVariable Integer id) {
         log.info("Updating crew: " + crew);
         crewService.save(crew);
         log.info("Crew updated successfully with info: " + crew);

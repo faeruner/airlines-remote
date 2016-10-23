@@ -10,7 +10,7 @@
     <artifactId>airlines-webservices</artifactId>
     <packaging>war</packaging>
 
-    <name>airlines-httpact</name>
+    <name>airlines-webservices</name>
     <url>http://maven.apache.org</url>
 
 
