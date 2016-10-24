@@ -10,10 +10,11 @@ import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CommonServiceImpl<T extends Fact, A extends CommonEntityList<T>> implements CommonService<T> {
+public abstract class CommonServiceImpl<T extends Fact, L extends CommonEntityList<T>> implements CommonService<T> {
 
     private static final String PROP_REST_PATH = "rest.path";
     private static final String PROP_REST_GET_ALL = "rest.suffix.getAll";
+    private static final String PROP_REST_GET_PAGE = "rest.suffix.getPage";
     private static final String PROP_REST_GET_BY_ID = "rest.suffix.getById";
     private static final String PROP_REST_CREATE = "rest.suffix.create";
     private static final String PROP_REST_UPDATE = "rest.suffix.update";
@@ -24,11 +25,13 @@ public abstract class CommonServiceImpl<T extends Fact, A extends CommonEntityLi
     private final RestTemplate restTemplate;
 
     private final Class<T> clazz;
+    private final Class<L> listClazz;
 
     private final String entityName;
 
     public CommonServiceImpl(RestTemplate restTemplate, Environment env, String entityName) {
         this.clazz = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        this.listClazz = (Class<L>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
         Assert.notNull(env, "Environment must not be null!");
         this.env = env;
         Assert.notNull(restTemplate, "RestTemplate must not be null!");
@@ -36,22 +39,40 @@ public abstract class CommonServiceImpl<T extends Fact, A extends CommonEntityLi
         this.entityName = entityName;
     }
 
+    private String getPath(String suffix) {
+        return String.format(env.getProperty(PROP_REST_PATH) + env.getProperty(suffix), entityName);
+    }
+
     public T getById(Integer id) {
-        String path = String.format(env.getProperty(PROP_REST_PATH) + env.getProperty(PROP_REST_GET_BY_ID), entityName);
-        A list = restTemplate.getForObject(path, clazz, id);
-        return list.getEntity().get(0);
+        return restTemplate.getForObject(getPath(PROP_REST_GET_BY_ID), clazz, id);
+        ;
     }
 
     public void delete(Integer id) {
-        getDao().delete(id);
+        restTemplate.delete(getPath(PROP_REST_DELETE), id);
     }
 
     public Integer add(T entity) {
-        return getDao().add(entity);
+        return restTemplate.postForObject(getPath(PROP_REST_CREATE), entity, clazz).getId();
     }
 
-    public T update(T entity) {
-        return getDao().update(entity);
+    public void update(T entity) {
+        restTemplate.put(PROP_REST_UPDATE, entity, entity.getId());
+    }
+
+    public List<T> getAll() {
+        L list = restTemplate.getForObject(getPath(PROP_REST_GET_ALL), listClazz);
+        return list.getEntities();
+    }
+
+    public List<T> getPage(Integer page, Integer size) {
+        L list = restTemplate.getForObject(getPath(PROP_REST_GET_PAGE), listClazz, page, size);
+        return list.getEntities();
+    }
+
+    public Long getInsertPageNum(Integer size) {
+        Long count = getDao().getCount();
+        return count / size + 1;
     }
 
     public List<Integer> getPageNumbers(Integer size) {
@@ -62,18 +83,5 @@ public abstract class CommonServiceImpl<T extends Fact, A extends CommonEntityLi
             count -= size;
         }
         return listPages;
-    }
-
-    public List<T> getAll() {
-        return getDao().getAll();
-    }
-
-    public List<T> getPage(Integer page, Integer size) {
-        return getDao().getPage(page, size);
-    }
-
-    public Long getInsertPageNum(Integer size) {
-        Long count = getDao().getCount();
-        return count / size + 1;
     }
 }

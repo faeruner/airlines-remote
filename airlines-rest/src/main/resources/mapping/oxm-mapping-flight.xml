@@ -1,6 +1,6 @@
 <cas:mapping xmlns:cas="http://castor.exolab.org/">
-    <cas:class name="by.pvt.module4.model.Flights">
-        <cas:field name="flights" type="by.pvt.module4.model.Flight" collection="arraylist">
+    <cas:class name="by.pvt.module4.common.CommonEntityListImpl">
+        <cas:field name="entities" type="by.pvt.module4.model.Flight" collection="arraylist">
             <cas:bind-xml name="flight"/>
         </cas:field>
     </cas:class>

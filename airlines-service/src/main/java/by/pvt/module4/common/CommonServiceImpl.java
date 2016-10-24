@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -60,6 +59,7 @@ public abstract class CommonServiceImpl<T extends Fact> implements CommonService
         return findAll(true);
     }
 
+/*
     @Override
     public List<Integer> getPageNumbers(Integer size) {
         Long count = commonRepository.count();
@@ -75,4 +75,5 @@ public abstract class CommonServiceImpl<T extends Fact> implements CommonService
     public Long getInsertPageNum(Integer size) {
         return commonRepository.count() / size + 1;
     }
+*/
 }

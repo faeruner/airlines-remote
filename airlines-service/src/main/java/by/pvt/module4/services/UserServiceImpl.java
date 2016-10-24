@@ -1,14 +1,16 @@
 package by.pvt.module4.services;
 
+import by.pvt.module4.common.CommonServiceImpl;
 import by.pvt.module4.model.User;
 import by.pvt.module4.repository.UserRepository;
-import by.pvt.module4.common.CommonServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service("userService")
+@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 public class UserServiceImpl extends CommonServiceImpl<User> implements UserService {
 
     @Override

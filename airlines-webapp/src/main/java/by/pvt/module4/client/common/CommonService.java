@@ -11,7 +11,7 @@ public interface CommonService<T extends Fact> {
 
     Integer add(T entity);
 
-    T update(T entity);
+    void update(T entity);
 
     List<T> getPage(Integer page, Integer size);
 

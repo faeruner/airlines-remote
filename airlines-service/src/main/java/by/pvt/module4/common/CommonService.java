@@ -23,7 +23,9 @@ public interface CommonService<T extends Fact> {
 
     T save(T entity);
 
+/*
     List<Integer> getPageNumbers(Integer size);
 
     Long getInsertPageNum(Integer size);
+*/
 }

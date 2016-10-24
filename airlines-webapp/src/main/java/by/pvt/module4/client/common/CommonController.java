@@ -132,7 +132,8 @@ public abstract class CommonController<T extends Fact> {
     protected T update(T entity, Model model) {
         if (entity != null)
             try {
-                entity = commonService.update(entity);
+                commonService.update(entity);
+                entity = commonService.getById(entity.getId());
             } catch (Exception e) {
                 handleException(e, model);
             }
@@ -166,36 +167,36 @@ public abstract class CommonController<T extends Fact> {
     }
 
     private List<T> preparePagination(Integer page, Model model) {
-        // set pages
-        List<Integer> pages;
         try {
-            pages = commonService.getPageNumbers(PAGE_SIZE);
-        } catch (Exception e) {
-            handleException(e, model);
-            pages = new ArrayList<>();
-        }
-        model.addAttribute(PAGES, pages);
-        model.addAttribute(COUNT_PAGES, pages.size());
+            List<T> pageData = commonService.getPage(page, PAGE_SIZE);
+            // set pages
+            List<Integer> pages;
+            try {
+                pages = commonService.getPageNumbers(PAGE_SIZE);
+            } catch (Exception e) {
+                handleException(e, model);
+                pages = new ArrayList<>();
+            }
+            model.addAttribute(PAGES, pages);
+            model.addAttribute(COUNT_PAGES, pages.size());
 
-        // set current page
-        if (pages.size() > 0 && page != null) {
-            if (page > pages.size())
-                page = pages.size();
-        } else {
-            page = 1;
-        }
-        model.addAttribute(CURRENT_PAGE, page);
+            // set current page
+            if (pages.size() > 0 && page != null) {
+                if (page > pages.size())
+                    page = pages.size();
+            } else {
+                page = 1;
+            }
+            model.addAttribute(CURRENT_PAGE, page);
 
-        // set num page for new record
-        try {
-            model.addAttribute(INSERT_PAGE_NUM, commonService.getInsertPageNum(PAGE_SIZE));
-        } catch (Exception e) {
-            handleException(e, model);
-            model.addAttribute(INSERT_PAGE_NUM, 1);
-        }
-
-        try {
-            return commonService.getPage(page, PAGE_SIZE);
+            // set num page for new record
+            try {
+                model.addAttribute(INSERT_PAGE_NUM, commonService.getInsertPageNum(PAGE_SIZE));
+            } catch (Exception e) {
+                handleException(e, model);
+                model.addAttribute(INSERT_PAGE_NUM, 1);
+            }
+            return pageData;
         } catch (Exception e) {
             handleException(e, model);
         }

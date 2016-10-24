@@ -1,5 +1,7 @@
 package by.pvt.module4.client;
 
+import by.pvt.module4.common.CommonEntityList;
+import by.pvt.module4.common.CommonEntityListImpl;
 import by.pvt.module4.model.*;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.web.client.RestTemplate;
@@ -28,8 +30,8 @@ public class RestfulClientSample {
 
         Crew crew;
         System.out.println("Testing retrieve all crews: ");
-        Crews crews = restTemplate.getForObject(URL_GET_ALL_CREWS, Crews.class);
-        listEntity(crews.getEntity());
+        CommonEntityList<Crew> crews = restTemplate.getForObject(URL_GET_ALL_CREWS, CommonEntityListImpl.class);
+        listEntity(crews.getEntities());
         System.out.println("");
 
         System.out.println("Testing retrieve а crew by id: ");
@@ -58,13 +60,13 @@ public class RestfulClientSample {
 
         restTemplate.delete(URL_DELETE_CREW, crewNew.getId());
         System.out.println("Testing delete crew by id: ");
-        crews = restTemplate.getForObject(URL_GET_ALL_CREWS, Crews.class);
-        listEntity(crews.getEntity());
+        crews = restTemplate.getForObject(URL_GET_ALL_CREWS, CommonEntityListImpl.class);
+        listEntity(crews.getEntities());
 
 ////////////////////////////////////////////////////////////
         System.out.println("Testing retrieve all flights: ");
-        Flights flights = restTemplate.getForObject(URL_GET_ALL_FLIGHTS, Flights.class);
-        listEntity(flights.getEntity());
+        CommonEntityList<Flight> flights = restTemplate.getForObject(URL_GET_ALL_FLIGHTS, CommonEntityListImpl.class);
+        listEntity(flights.getEntities());
         System.out.println("");
 
         System.out.println("Testing retrieve а crew by id: ");
@@ -95,8 +97,8 @@ public class RestfulClientSample {
 
         restTemplate.delete(URL_DELETE_FLIGHT, flightNew.getId());
         System.out.println("Testing delete flight by id: ");
-        flights = restTemplate.getForObject(URL_GET_ALL_FLIGHTS, Flights.class);
-        listEntity(flights.getEntity());
+        flights = restTemplate.getForObject(URL_GET_ALL_FLIGHTS, CommonEntityListImpl.class);
+        listEntity(flights.getEntities());
     }
 
     private static <T> void listEntity(Collection<T> entities) {

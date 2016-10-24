@@ -5,10 +5,13 @@ import by.pvt.module4.model.Staff;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service("staffService")
+@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 public class StaffServiceImpl extends CommonServiceImpl<Staff> implements StaffService {
 
     @Override
