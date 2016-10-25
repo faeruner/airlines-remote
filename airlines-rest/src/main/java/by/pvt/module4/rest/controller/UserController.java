@@ -1,6 +1,7 @@
 package by.pvt.module4.rest.controller;
 
 import by.pvt.module4.model.User;
+import by.pvt.module4.model.Users;
 import by.pvt.module4.rest.common.CommonController;
 import by.pvt.module4.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/user")
-public class UserController extends CommonController<User> {
+public class UserController extends CommonController<User, Users> {
 
     private static final String PARAM_LOGIN = "login";
 

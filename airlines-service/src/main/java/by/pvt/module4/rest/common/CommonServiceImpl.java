@@ -61,21 +61,4 @@ public abstract class CommonServiceImpl<T extends Fact> implements CommonService
         return findAll(true);
     }
 
-/*
-    @Override
-    public List<Integer> getPageNumbers(Integer size) {
-        Long count = commonRepository.count();
-        List<Integer> listPages = new ArrayList<Integer>();
-        for (int i = 1; count > 0; i++) {
-            listPages.add(i);
-            count -= size;
-        }
-        return listPages;
-    }
-
-    @Override
-    public Long getInsertPageNum(Integer size) {
-        return commonRepository.count() / size + 1;
-    }
-*/
 }

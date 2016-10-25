@@ -1,7 +1,6 @@
 package by.pvt.module4.rest.common;
 
 import by.pvt.module4.common.CommonEntityList;
-import by.pvt.module4.common.CommonEntityListImpl;
 import by.pvt.module4.common.Fact;
 import by.pvt.module4.model.User;
 import by.pvt.module4.services.UserService;
@@ -14,13 +13,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.ParameterizedType;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
-public abstract class CommonController<T extends Fact> {
+public abstract class CommonController<T extends Fact, L extends CommonEntityList<T>> {
     protected Logger log = LogManager.getLogger(CommonController.class);
+
+    private final Class<L> listClazz;
 
     private static final DateFormat DF = new SimpleDateFormat("dd.MM.yyyy");
     private static final String PARAM_PAGE_SIZE = "size";
@@ -29,22 +31,41 @@ public abstract class CommonController<T extends Fact> {
     protected final CommonService<T> commonService;
 
     public CommonController(CommonService<T> commonService) {
+        this.listClazz = (Class<L>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
         this.commonService = commonService;
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public CommonEntityList<T> list() {
-        return new CommonEntityListImpl<>(commonService.findAll());
+    public L list() {
+        L list = null;
+        try {
+            list = listClazz.newInstance();
+            list.setEntities(commonService.findAll());
+        } catch (InstantiationException e) {
+            log.error(e);
+        } catch (IllegalAccessException e) {
+            log.error(e);
+        }
+        return list;
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     @ResponseBody
-    public CommonEntityList<T> page(@RequestParam(PARAM_PAGE_NUM) Integer number, @RequestParam(PARAM_PAGE_SIZE) Integer size) {
-        Page<T> page = commonService.findPage(new PageRequest(number, size));
-        CommonEntityList<T> pageData = new CommonEntityListImpl<>(page.getContent());
-        pageData.setTotalElements(page.getTotalElements());
-        pageData.setTotalPages(page.getTotalPages());
+    public L page(@RequestParam(PARAM_PAGE_NUM) Integer number, @RequestParam(PARAM_PAGE_SIZE) Integer size) {
+        Page<T> page = commonService.findPage(new PageRequest(number - 1, size));
+
+        L pageData = null;
+        try {
+            pageData = listClazz.newInstance();
+            pageData.setEntities(page.getContent());
+            pageData.setTotalElements(String.valueOf(page.getTotalElements()));
+            pageData.setTotalPages(page.getTotalPages());
+        } catch (InstantiationException e) {
+            log.error(e);
+        } catch (IllegalAccessException e) {
+            log.error(e);
+        }
         return pageData;
     }
 

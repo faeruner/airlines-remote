@@ -39,18 +39,6 @@ public abstract class CommonServiceImpl<T extends Fact, L extends CommonEntityLi
         this.entityName = entityName;
     }
 
-/*
-    public CommonServiceImpl(RestTemplate restTemplate, Environment env, String entityName) {
-        this.clazz = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-        this.listClazz = (Class<L>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
-        Assert.notNull(env, "Environment must not be null!");
-        this.env = env;
-        Assert.notNull(restTemplate, "RestTemplate must not be null!");
-        this.restTemplate = restTemplate;
-        this.entityName = entityName;
-    }
-*/
-
     protected String getPath(String suffix) {
         return String.format(env.getProperty(PROP_REST_PATH) + env.getProperty(suffix), entityName);
     }

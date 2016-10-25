@@ -24,6 +24,8 @@ import java.util.Map;
 @Controller
 public class LoginController extends CommonController<User> {
 
+    private static final String PAGE_LOGIN = "login";
+
     @Autowired
     private Environment env;
 
@@ -32,7 +34,7 @@ public class LoginController extends CommonController<User> {
 
     @Autowired
     public LoginController(CrewController crewController, AirlineController airlineController, UserService userService) {
-        super("path.page.login", "path.page.login", userService, userService);
+        super(PAGE_LOGIN, PAGE_LOGIN, userService, userService);
         Assert.notNull(crewController, "crewService must not be Null!");
         this.crewController = crewController;
         Assert.notNull(airlineController, "airlineService must not be Null!");
@@ -41,7 +43,7 @@ public class LoginController extends CommonController<User> {
 
     @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
     public String logout(HttpServletRequest httpRequest, HttpServletResponse httpResponse, HttpSession httpSession) {
-        String page = env.getProperty("path.page.index");
+        String page = PAGE_LOGIN;
 //        httpSession.invalidate();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
@@ -52,7 +54,7 @@ public class LoginController extends CommonController<User> {
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST, RequestMethod.GET})
     private String login(@RequestParam Map<String, String> paramMap, Model model, HttpSession httpSession) {
-        String page = env.getProperty("path.page.login");
+        String page = PAGE_LOGIN;
         User user = getSecurityUser(model);
         if (user != null) {
             model.addAttribute("user", user);
@@ -75,6 +77,6 @@ public class LoginController extends CommonController<User> {
             model.addAttribute("user", user);
         }
         model.addAttribute("errorLoginPassMessage", env.getProperty("message.loginerror"));
-        return env.getProperty("path.page.login");
+        return PAGE_LOGIN;
     }
 }

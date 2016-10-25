@@ -3,6 +3,12 @@
         <cas:field name="entities" type="by.pvt.module4.model.MemberType" collection="arraylist">
             <cas:bind-xml name="memberType"/>
         </cas:field>
+        <cas:field name="totalPages" type="int" required="true">
+            <cas:bind-xml name="totalPages" node="element"/>
+        </cas:field>
+        <cas:field name="totalElements" type="string" required="true">
+            <cas:bind-xml name="totalElements" node="element"/>
+        </cas:field>
     </cas:class>
     <cas:class name="by.pvt.module4.model.MemberType" identity="id">
         <cas:map-to xml="memberType"/>

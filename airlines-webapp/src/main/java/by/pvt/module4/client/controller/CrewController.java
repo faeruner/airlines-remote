@@ -37,7 +37,7 @@ public class CrewController extends CommonController<Crew> {
 
     @Autowired
     public CrewController(UserService userService, CommonService<Crew> commonService, CommonService<Staff> staffService) {
-        super("path.page.edit_crew", "path.page.crews", userService, commonService);
+        super("crew-edit", "crew-list", userService, commonService);
         Assert.notNull(staffService, "staffService must not be Null!");
         this.staffService = staffService;
     }

@@ -25,7 +25,7 @@ public class StaffController extends CommonController<Staff> {
 
     @Autowired
     public StaffController(UserService userService, CommonService<Staff> commonService, CommonService<MemberType> memberTypeService) {
-        super("path.page.edit_staff", "path.page.staff", userService, commonService);
+        super("staff-edit", "staff-list", userService, commonService);
         Assert.notNull(memberTypeService, "memberTypeService must not be Null!");
         this.memberTypeService = memberTypeService;
     }

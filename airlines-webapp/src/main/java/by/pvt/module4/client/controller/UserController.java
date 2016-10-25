@@ -24,7 +24,7 @@ public class UserController extends CommonController<User> {
 
     @Autowired
     public UserController(UserService userService, CommonService<User> commonService, CommonService<UserRole> userRoleService) {
-        super("path.page.edit_user", "path.page.users", userService, commonService);
+        super("user-edit", "user-list", userService, commonService);
         Assert.notNull(userRoleService, "userRoleService must not be Null!");
         this.userRoleService = userRoleService;
     }

@@ -9,9 +9,9 @@ public interface CommonEntityList<T extends Fact> {
 
     Integer getTotalPages();
 
-    Long getTotalElements();
+    String getTotalElements();
 
     void setTotalPages(Integer totalPages);
 
-    void setTotalElements(Long totalElements);
+    void setTotalElements(String totalElements);
 }

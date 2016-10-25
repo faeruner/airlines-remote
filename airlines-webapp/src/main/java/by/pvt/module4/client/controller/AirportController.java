@@ -18,7 +18,7 @@ import java.util.Map;
 public class AirportController extends CommonController<Airport> {
     @Autowired
     public AirportController(UserService userService, CommonService<Airport> commonService) {
-        super("path.page.edit_airport", "path.page.airports", userService, commonService);
+        super("airport-edit", "airport-list", userService, commonService);
     }
 
     @RequestMapping

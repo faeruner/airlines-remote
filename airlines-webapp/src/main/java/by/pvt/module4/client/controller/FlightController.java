@@ -34,7 +34,7 @@ public class FlightController extends CommonController<Flight> {
 
     @Autowired
     public FlightController(UserService userService, CommonService<Flight> commonService, CommonService<Crew> crewService, CommonService<Airline> airlineService, CommonService<Airport> airportService) {
-        super("path.page.edit_flight", "path.page.flights", userService, commonService);
+        super("flight-edit", "flight-list", userService, commonService);
         Assert.notNull(crewService, "crewService must not be Null!");
         this.crewService = crewService;
         Assert.notNull(airlineService, "airlineService must not be Null!");

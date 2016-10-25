@@ -169,7 +169,7 @@ public abstract class CommonController<T extends Fact> {
 
     private List<Integer> getPageNumbers(Integer size) {
         List<Integer> listPages = new ArrayList<>();
-        for (int i = 0; i < size; ) {
+        for (Integer i = 0; i < size; ) {
             listPages.add(++i);
         }
         return listPages;
@@ -194,7 +194,7 @@ public abstract class CommonController<T extends Fact> {
 
             // set num page for new record
             try {
-                model.addAttribute(INSERT_PAGE_NUM, page.getTotalElements() / PAGE_SIZE + 1);
+                model.addAttribute(INSERT_PAGE_NUM, Integer.parseInt(page.getTotalElements()) / PAGE_SIZE + 1);
             } catch (Exception e) {
                 handleException(e, model);
                 model.addAttribute(INSERT_PAGE_NUM, 1);

@@ -6,7 +6,7 @@ import java.util.List;
 public class CommonEntityListImpl<T extends Fact> implements Serializable, CommonEntityList<T> {
 
     private List<T> entities;
-    private Long totalElements;
+    private String totalElements;
     private Integer totalPages;
 
     public CommonEntityListImpl() {
@@ -32,7 +32,7 @@ public class CommonEntityListImpl<T extends Fact> implements Serializable, Commo
     }
 
     @Override
-    public Long getTotalElements() {
+    public String getTotalElements() {
         return totalElements;
     }
 
@@ -42,7 +42,7 @@ public class CommonEntityListImpl<T extends Fact> implements Serializable, Commo
     }
 
     @Override
-    public void setTotalElements(Long totalElements) {
+    public void setTotalElements(String totalElements) {
         this.totalElements = totalElements;
     }
 }

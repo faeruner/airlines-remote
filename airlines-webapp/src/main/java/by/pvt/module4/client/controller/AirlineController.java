@@ -21,7 +21,7 @@ public class AirlineController extends CommonController<Airline> {
 
     @Autowired
     public AirlineController(UserService userService, CommonService<Airline> commonService) {
-        super("path.page.edit_airline", "path.page.airlines", userService, commonService);
+        super("airline-edit", "airline-list", userService, commonService);
     }
 
     @RequestMapping
