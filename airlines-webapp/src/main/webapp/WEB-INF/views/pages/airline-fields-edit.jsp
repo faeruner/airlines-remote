@@ -4,12 +4,10 @@
     <div class="col-xs-12">
         <div class="form-group has-feedback" id="inputNameGroup">
             <label for="inputName" class="control-label">Name</label>
-            <input data-remote="${action}/validate" data-equals="foo" data-equals-error="ошибка?" type="text"
-                   class="form-control" id="inputName" maxlength="100" name="name" value="${entity.name}"
-                   required>
+            <input data-remote="${action}/validate" type="text" class="form-control" id="inputName" maxlength="100"
+                   name="name" value="${entity.name}" required>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-            <div class="help-block with-errors"></div>
-            <div class="text-danger">Error: ${requestScope.msgwrongname} ${entity.name}</div>
+            <div class="help-block with-errors">iniput airline</div>
         </div>
         <%--
                 <script type="text/javascript">

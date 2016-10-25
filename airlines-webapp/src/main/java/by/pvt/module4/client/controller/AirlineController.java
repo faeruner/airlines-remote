@@ -5,6 +5,8 @@ import by.pvt.module4.client.common.CommonService;
 import by.pvt.module4.client.service.UserService;
 import by.pvt.module4.model.Airline;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +14,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
 import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/controller/airline", method = {RequestMethod.GET, RequestMethod.POST})
+@PropertySource("classpath:messages.properties")
 public class AirlineController extends CommonController<Airline> {
+
+    @Autowired
+    private Environment env;
 
     @Autowired
     public AirlineController(UserService userService, CommonService<Airline> commonService) {
@@ -31,21 +38,17 @@ public class AirlineController extends CommonController<Airline> {
     }
 
     @RequestMapping("/validate")
-    public String validate(@RequestParam Map<String, String> paramMap, Model model, HttpServletResponse response) {
+    public void validate(@RequestParam Map<String, String> paramMap, Model model, HttpServletResponseWrapper response) {
         if (paramMap.containsKey(Airline.NAME)) {
             String name = paramMap.get(Airline.NAME).trim();
-            if (!name.toLowerCase().contains("airline")) {
+            if (name.toLowerCase().contains("error")) {
                 try {
-                    response.setContentType("text/html;charset=UTF-8");
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                    //model.addAttribute("msg_wrong_name", "ошибка в имени");
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, env.getProperty("message.wrong.name"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-        model.addAttribute(ENTITY, updateEntity(findById(paramMap, model), paramMap));
-        return getEditPage(paramMap, model);
     }
 
     private Airline updateEntity(Airline airline, Map<String, String> paramMap) {

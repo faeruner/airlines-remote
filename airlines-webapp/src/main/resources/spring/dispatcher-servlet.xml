@@ -73,4 +73,11 @@
             </bean>
         </property>
     </bean>
+    <bean class="by.pvt.module4.client.common.SystemPropertiesInitializingBean">
+        <property name="systemProperties">
+            <map>
+                <entry key="org.apache.coyote.USE_CUSTOM_STATUS_MSG_IN_HEADER" value="true"/>
+            </map>
+        </property>
+    </bean>
 </beans>
