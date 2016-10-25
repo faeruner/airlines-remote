@@ -1,12 +1,11 @@
-package by.pvt.module3.controller;
+package by.pvt.module4.client.controller;
 
-import by.pvt.module3.controller.common.CommonController;
-import by.pvt.module3.entity.User;
-import by.pvt.module3.filter.UserType;
-import by.pvt.module3.resource.ConfigurationManager;
-import by.pvt.module3.resource.MessageManager;
-import by.pvt.module3.service.UserService;
+import by.pvt.module4.client.common.CommonController;
+import by.pvt.module4.client.service.UserService;
+import by.pvt.module4.model.User;
+import by.pvt.module4.model.UserRoleType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -25,6 +24,9 @@ import java.util.Map;
 @Controller
 public class LoginController extends CommonController<User> {
 
+    @Autowired
+    private Environment env;
+
     private final AirlineController airlineController;
     private final CrewController crewController;
 
@@ -39,7 +41,7 @@ public class LoginController extends CommonController<User> {
 
     @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
     public String logout(HttpServletRequest httpRequest, HttpServletResponse httpResponse, HttpSession httpSession) {
-        String page = ConfigurationManager.getProperty("path.page.index");
+        String page = env.getProperty("path.page.index");
 //        httpSession.invalidate();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
@@ -50,16 +52,16 @@ public class LoginController extends CommonController<User> {
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST, RequestMethod.GET})
     private String login(@RequestParam Map<String, String> paramMap, Model model, HttpSession httpSession) {
-        String page = ConfigurationManager.getProperty("path.page.login");
+        String page = env.getProperty("path.page.login");
         User user = getSecurityUser(model);
         if (user != null) {
             model.addAttribute("user", user);
 
-            if (UserType.ADMINISTRATOR.getId().equals(user.getRole().getId())) {
-                httpSession.setAttribute("userType", UserType.ADMINISTRATOR);
+            if (UserRoleType.ADMINISTRATOR.getId().equals(user.getRole().getId())) {
+                httpSession.setAttribute("userType", UserRoleType.ADMINISTRATOR);
                 page = airlineController.perform(paramMap, model);
-            } else if (UserType.DISPATCHER.getId().equals(user.getRole().getId())) {
-                httpSession.setAttribute("userType", UserType.DISPATCHER);
+            } else if (UserRoleType.DISPATCHER.getId().equals(user.getRole().getId())) {
+                httpSession.setAttribute("userType", UserRoleType.DISPATCHER);
                 page = crewController.perform(paramMap, model);
             }
         }
@@ -72,7 +74,7 @@ public class LoginController extends CommonController<User> {
         if (user != null) {
             model.addAttribute("user", user);
         }
-        model.addAttribute("errorLoginPassMessage", MessageManager.getProperty("message.loginerror"));
-        return ConfigurationManager.getProperty("path.page.login");
+        model.addAttribute("errorLoginPassMessage", env.getProperty("message.loginerror"));
+        return env.getProperty("path.page.login");
     }
 }

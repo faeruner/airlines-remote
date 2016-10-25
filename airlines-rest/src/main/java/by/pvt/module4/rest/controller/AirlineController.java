@@ -1,7 +1,7 @@
-package by.pvt.module4.controller;
+package by.pvt.module4.rest.controller;
 
-import by.pvt.module4.common.CommonController;
 import by.pvt.module4.model.Airline;
+import by.pvt.module4.rest.common.CommonController;
 import by.pvt.module4.services.AirlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

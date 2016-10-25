@@ -1,5 +1,6 @@
 package by.pvt.module4.client.common;
 
+import by.pvt.module4.common.CommonEntityList;
 import by.pvt.module4.common.Fact;
 
 import java.util.List;
@@ -13,11 +14,8 @@ public interface CommonService<T extends Fact> {
 
     void update(T entity);
 
-    List<T> getPage(Integer page, Integer size);
+    CommonEntityList<T> getPage(Integer page, Integer size);
 
     List<T> getAll();
 
-    List<Integer> getPageNumbers(Integer size);
-
-    Long getInsertPageNum(Integer size);
 }

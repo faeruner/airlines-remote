@@ -1,5 +1,6 @@
-package by.pvt.module4.common;
+package by.pvt.module4.rest.common;
 
+import by.pvt.module4.common.Fact;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

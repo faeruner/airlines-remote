@@ -1,11 +1,11 @@
 <cas:mapping xmlns:cas="http://castor.exolab.org/">
-    <cas:class name="by.pvt.module4.common.CommonEntityListImpl">
-        <cas:field name="entities" type="by.pvt.module4.model.MemberType" collection="arraylist">
-            <cas:bind-xml name="memberType"/>
+    <cas:class name="by.pvt.module4.model.UserRoles">
+        <cas:field name="entities" type="by.pvt.module4.model.UserRole" collection="arraylist">
+            <cas:bind-xml name="userRole"/>
         </cas:field>
     </cas:class>
-    <cas:class name="by.pvt.module4.model.MemberType" identity="id">
-        <cas:map-to xml="memberType"/>
+    <cas:class name="by.pvt.module4.model.UserRole" identity="id">
+        <cas:map-to xml="userRole"/>
         <cas:field name="id" type="int" required="true">
             <cas:bind-xml name="id" node="element"/>
         </cas:field>

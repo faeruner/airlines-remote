@@ -27,5 +27,5 @@
     <authentication-manager>
         <authentication-provider user-service-ref="authService"/>
     </authentication-manager>
-    <beans:bean id="authService" class="by.pvt.module3.auth.AuthenticationService"/>
+    <beans:bean id="authService" class="by.pvt.module4.client.common.AuthenticationService"/>
 </beans:beans>

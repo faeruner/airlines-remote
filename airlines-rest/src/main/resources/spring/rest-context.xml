@@ -19,7 +19,7 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-    <context:component-scan base-package="by.pvt.module4.controller"/>
+    <context:component-scan base-package="by.pvt.module4.rest.controller"/>
     <bean id="castorMarshaller"
           class="org.springframework.oxm.castor.CastorMarshaller">
         <property name="mappingLocation"

@@ -1,9 +1,9 @@
-package by.pvt.module3.controller;
+package by.pvt.module4.client.controller;
 
-import by.pvt.module3.controller.common.CommonController;
-import by.pvt.module3.entity.*;
-import by.pvt.module3.service.UserService;
-import by.pvt.module3.service.common.CommonService;
+import by.pvt.module4.client.common.CommonController;
+import by.pvt.module4.client.common.CommonService;
+import by.pvt.module4.client.service.UserService;
+import by.pvt.module4.model.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

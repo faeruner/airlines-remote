@@ -1,6 +1,7 @@
 package by.pvt.module4.client.common;
 
 import by.pvt.module4.client.service.UserService;
+import by.pvt.module4.common.CommonEntityList;
 import by.pvt.module4.common.Fact;
 import by.pvt.module4.model.User;
 import org.apache.log4j.LogManager;
@@ -166,37 +167,39 @@ public abstract class CommonController<T extends Fact> {
         return pathPageList;
     }
 
-    private List<T> preparePagination(Integer page, Model model) {
+    private List<Integer> getPageNumbers(Integer size) {
+        List<Integer> listPages = new ArrayList<>();
+        for (int i = 0; i < size; ) {
+            listPages.add(++i);
+        }
+        return listPages;
+    }
+
+    private List<T> preparePagination(Integer number, Model model) {
         try {
-            List<T> pageData = commonService.getPage(page, PAGE_SIZE);
+            CommonEntityList<T> page = commonService.getPage(number, PAGE_SIZE);
             // set pages
-            List<Integer> pages;
-            try {
-                pages = commonService.getPageNumbers(PAGE_SIZE);
-            } catch (Exception e) {
-                handleException(e, model);
-                pages = new ArrayList<>();
-            }
+            List<Integer> pages = getPageNumbers(page.getTotalPages());
             model.addAttribute(PAGES, pages);
             model.addAttribute(COUNT_PAGES, pages.size());
 
             // set current page
-            if (pages.size() > 0 && page != null) {
-                if (page > pages.size())
-                    page = pages.size();
+            if (page.getTotalPages() > 0 && number != null) {
+                if (number > page.getTotalPages())
+                    number = page.getTotalPages();
             } else {
-                page = 1;
+                number = 1;
             }
-            model.addAttribute(CURRENT_PAGE, page);
+            model.addAttribute(CURRENT_PAGE, number);
 
             // set num page for new record
             try {
-                model.addAttribute(INSERT_PAGE_NUM, commonService.getInsertPageNum(PAGE_SIZE));
+                model.addAttribute(INSERT_PAGE_NUM, page.getTotalElements() / PAGE_SIZE + 1);
             } catch (Exception e) {
                 handleException(e, model);
                 model.addAttribute(INSERT_PAGE_NUM, 1);
             }
-            return pageData;
+            return page.getEntities();
         } catch (Exception e) {
             handleException(e, model);
         }

@@ -1,5 +1,7 @@
-package by.pvt.module4.common;
+package by.pvt.module4.rest.common;
 
+import by.pvt.module4.common.CommonRepository;
+import by.pvt.module4.common.Fact;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

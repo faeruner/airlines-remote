@@ -28,6 +28,7 @@
         <property name="prefix" value=""/>
         <property name="suffix" value=""/>
     </bean>
+
     <bean id="restTemplate"
           class="org.springframework.web.client.RestTemplate">
         <constructor-arg ref="httpRequestFactory"/>
@@ -48,7 +49,7 @@
             </list>
         </property>
     </bean>
-    <bean id="castorMarshaller"
+    <bean id="castorMarshaller" scope="singleton"
           class="org.springframework.oxm.castor.CastorMarshaller">
         <property name="mappingLocations"
                   value="classpath:mapping/oxm-mapping.xml"/>
@@ -62,7 +63,7 @@
     </bean>
     <bean class="org.apache.http.impl.client.HttpClientBuilder" id="httpClientBuilder">
         <property name="defaultCredentialsProvider">
-            <bean class="by.pvt.module4.client.CustomCredentialsProvider">
+            <bean class="by.pvt.module4.client.common.CustomCredentialsProvider">
                 <property name="credentials">
                     <bean class="org.apache.http.auth.UsernamePasswordCredentials">
                         <constructor-arg name="userName" value="remote"/>

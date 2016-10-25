@@ -1,5 +1,5 @@
 ﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id="entity" scope="request" type="by.pvt.module3.entity.Airline"/>
+<jsp:useBean id="entity" scope="request" type="by.pvt.module4.model.Airline"/>
 <div class="row">
     <div class="col-xs-12">
         <div class="form-group has-feedback" id="inputNameGroup">

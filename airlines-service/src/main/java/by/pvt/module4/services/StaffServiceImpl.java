@@ -1,7 +1,7 @@
 package by.pvt.module4.services;
 
-import by.pvt.module4.common.CommonServiceImpl;
 import by.pvt.module4.model.Staff;
+import by.pvt.module4.rest.common.CommonServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

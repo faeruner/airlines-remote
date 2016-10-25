@@ -1,4 +1,4 @@
-<jsp:useBean id="item" scope="request" type="by.pvt.module3.entity.User"/>
+<jsp:useBean id="item" scope="request" type="by.pvt.module4.model.User"/>
 <td>${item.id}</td>
 <td>${item.name}</td>
 <td>${item.surname}</td>

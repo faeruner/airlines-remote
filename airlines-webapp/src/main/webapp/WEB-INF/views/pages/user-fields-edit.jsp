@@ -1,4 +1,4 @@
-<jsp:useBean id="entity" scope="request" type="by.pvt.module3.entity.User"/>
+<jsp:useBean id="entity" scope="request" type="by.pvt.module4.model.User"/>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="row">
     <div class="col-xs-5">

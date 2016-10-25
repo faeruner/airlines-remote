@@ -1,10 +1,10 @@
-package by.pvt.module3.controller;
+package by.pvt.module4.client.controller;
 
-import by.pvt.module3.controller.common.CommonController;
-import by.pvt.module3.entity.MemberType;
-import by.pvt.module3.entity.Staff;
-import by.pvt.module3.service.UserService;
-import by.pvt.module3.service.common.CommonService;
+import by.pvt.module4.client.common.CommonController;
+import by.pvt.module4.client.common.CommonService;
+import by.pvt.module4.client.service.UserService;
+import by.pvt.module4.model.MemberType;
+import by.pvt.module4.model.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

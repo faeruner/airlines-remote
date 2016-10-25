@@ -1,22 +1,27 @@
-package by.pvt.module3.service;
+package by.pvt.module4.client.service;
 
-import by.pvt.module3.dao.UserDao;
-import by.pvt.module3.entity.User;
-import by.pvt.module3.service.common.BaseService;
+import by.pvt.module4.client.common.CommonServiceImpl;
+import by.pvt.module4.model.User;
+import by.pvt.module4.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
-@Service
-public class UserServiceImpl extends BaseService<User> implements UserService {
+@Service("userService")
+public class UserServiceImpl extends CommonServiceImpl<User, Users> implements UserService {
+
+    private static final String PROP_REST_GET_DATA = "rest.suffix.getData";
+
     @Autowired
-    public UserServiceImpl(UserDao dao) {
-        super(dao);
+    public UserServiceImpl(RestTemplate restTemplate, Environment env) {
+        super(restTemplate, env, "user");
     }
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public User getUserByLogin(String login) {
-        return ((UserDao) getDao()).getUserByLogin(login);
+        return restTemplate.getForObject(getPath(PROP_REST_GET_DATA + "login={login}"), User.class, login);
     }
 }

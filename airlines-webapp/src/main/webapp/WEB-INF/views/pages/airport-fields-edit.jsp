@@ -1,4 +1,4 @@
-<jsp:useBean id="entity" scope="request" type="by.pvt.module3.entity.Airport"/>
+<jsp:useBean id="entity" scope="request" type="by.pvt.module4.model.Airport"/>
 <div class="row">
     <div class="col-xs-12">
         <div class="form-group has-feedback">

@@ -1,4 +1,4 @@
-<jsp:useBean id="item" scope="request" type="by.pvt.module3.entity.Flight"/>
+<jsp:useBean id="item" scope="request" type="by.pvt.module4.model.Flight"/>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <td>${item.id}</td>
 <td>${item.code}</td>

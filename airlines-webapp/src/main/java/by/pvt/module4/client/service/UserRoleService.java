@@ -1,15 +1,17 @@
-package by.pvt.module3.service;
+package by.pvt.module4.client.service;
 
-import by.pvt.module3.dao.common.CommonDao;
-import by.pvt.module3.entity.UserRole;
-import by.pvt.module3.service.common.BaseService;
+import by.pvt.module4.client.common.CommonServiceImpl;
+import by.pvt.module4.model.UserRole;
+import by.pvt.module4.model.UserRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
-public class UserRoleService extends BaseService<UserRole> {
+public class UserRoleService extends CommonServiceImpl<UserRole, UserRoles> {
     @Autowired
-    public UserRoleService(CommonDao<UserRole> dao) {
-        super(dao);
+    public UserRoleService(RestTemplate restTemplate, Environment env) {
+        super(restTemplate, env, "userrole");
     }
 }

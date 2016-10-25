@@ -1,5 +1,8 @@
-package by.pvt.module4.common;
+package by.pvt.module4.rest.common;
 
+import by.pvt.module4.common.CommonEntityList;
+import by.pvt.module4.common.CommonEntityListImpl;
+import by.pvt.module4.common.Fact;
 import by.pvt.module4.model.User;
 import by.pvt.module4.services.UserService;
 import org.apache.log4j.LogManager;
@@ -20,26 +23,25 @@ public abstract class CommonController<T extends Fact> {
     protected Logger log = LogManager.getLogger(CommonController.class);
 
     private static final DateFormat DF = new SimpleDateFormat("dd.MM.yyyy");
-    private static final Integer DEF_PAGE_SIZE = 3;
-    private static final String PARAM_PAGE_SIZE = "page_size";
-    private static final String PARAM_PAGE_NUM = "page";
+    private static final String PARAM_PAGE_SIZE = "size";
+    private static final String PARAM_PAGE_NUM = "number";
 
-    private final CommonService<T> commonService;
+    protected final CommonService<T> commonService;
 
     public CommonController(CommonService<T> commonService) {
         this.commonService = commonService;
     }
 
-    @RequestMapping(value = "/listdata", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public CommonEntityList<T> listData() {
+    public CommonEntityList<T> list() {
         return new CommonEntityListImpl<>(commonService.findAll());
     }
 
-    @RequestMapping(value = "/pagedata", method = RequestMethod.GET)
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
     @ResponseBody
-    public CommonEntityList<T> pageData(@RequestParam Map<String, String> paramMap) {
-        Page<T> page = findPage(paramMap);
+    public CommonEntityList<T> page(@RequestParam(PARAM_PAGE_NUM) Integer number, @RequestParam(PARAM_PAGE_SIZE) Integer size) {
+        Page<T> page = commonService.findPage(new PageRequest(number, size));
         CommonEntityList<T> pageData = new CommonEntityListImpl<>(page.getContent());
         pageData.setTotalElements(page.getTotalElements());
         pageData.setTotalPages(page.getTotalPages());
@@ -48,7 +50,7 @@ public abstract class CommonController<T extends Fact> {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public T findOne(@PathVariable Integer id) {
+    public T findById(@PathVariable Integer id) {
         return commonService.findOne(id);
     }
 
@@ -76,12 +78,6 @@ public abstract class CommonController<T extends Fact> {
         T crew = commonService.findOne(id);
         commonService.delete(crew);
         log.info("Entity deleted successfully");
-    }
-
-    protected Page<T> findPage(Map<String, String> paramMap) {
-        Integer page = getParamIntDef(paramMap, PARAM_PAGE_NUM, 1);
-        Integer size = getParamIntDef(paramMap, PARAM_PAGE_SIZE, DEF_PAGE_SIZE);
-        return commonService.findPage(new PageRequest(page, size));
     }
 
     protected User getSecurityUser(UserService userService) {
