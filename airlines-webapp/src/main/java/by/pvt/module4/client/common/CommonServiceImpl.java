@@ -3,13 +3,15 @@ package by.pvt.module4.client.common;
 import by.pvt.module4.common.CommonEntityList;
 import by.pvt.module4.common.CommonEntityListImpl;
 import by.pvt.module4.common.Fact;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+@PropertySource("classpath:config.properties")
 public abstract class CommonServiceImpl<T extends Fact, L extends CommonEntityListImpl<T>> implements CommonService<T> {
 
     private static final String PROP_REST_PATH = "rest.path";
@@ -20,22 +22,24 @@ public abstract class CommonServiceImpl<T extends Fact, L extends CommonEntityLi
     private static final String PROP_REST_UPDATE = "rest.suffix.update";
     private static final String PROP_REST_DELETE = "rest.suffix.delete";
 
-    private final Environment env;
+    @Autowired
+    private Environment env;
 
-    protected final RestTemplate restTemplate;
+    @Autowired
+    protected RestTemplate restTemplate;
 
     private final Class<T> clazz;
     private final Class<L> listClazz;
 
     private final String entityName;
 
-/*
     public CommonServiceImpl(String entityName) {
         this.clazz = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        this.listClazz = (Class<L>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
         this.entityName = entityName;
     }
-*/
 
+/*
     public CommonServiceImpl(RestTemplate restTemplate, Environment env, String entityName) {
         this.clazz = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         this.listClazz = (Class<L>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
@@ -45,6 +49,7 @@ public abstract class CommonServiceImpl<T extends Fact, L extends CommonEntityLi
         this.restTemplate = restTemplate;
         this.entityName = entityName;
     }
+*/
 
     protected String getPath(String suffix) {
         return String.format(env.getProperty(PROP_REST_PATH) + env.getProperty(suffix), entityName);
