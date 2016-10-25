@@ -15,7 +15,7 @@
         <cas:field name="id" type="int" required="true">
             <cas:bind-xml name="id" node="element"/>
         </cas:field>
-        <cas:field name="createDate" type="string" handler="dateHandler">
+        <cas:field name="createDate" type="string" handler="dateHandler2">
             <cas:bind-xml name="createDate" node="element"/>
         </cas:field>
         <cas:field name="ready" type="int">
@@ -24,8 +24,12 @@
         <cas:field name="user" type="by.pvt.module4.model.User">
             <cas:bind-xml name="user" node="element"/>
         </cas:field>
-        <cas:field name="members" type="by.pvt.module4.model.StaffList" collection="set">
+        <cas:field name="members" type="by.pvt.module4.model.Staff" collection="set">
             <cas:bind-xml name="staffItem" node="element"/>
         </cas:field>
     </cas:class>
+    <field-handler name="dateHandler2"
+                   class="by.pvt.module4.common.DateTimeFieldHandler">
+        <param name="date-format" value="yyyy-MM-dd"/>
+    </field-handler>
 </cas:mapping>

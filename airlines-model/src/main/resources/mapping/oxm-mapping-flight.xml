@@ -18,14 +18,14 @@
         <cas:field name="code" type="string">
             <cas:bind-xml name="code" node="element"/>
         </cas:field>
-        <cas:field name="depDate" type="string" handler="dateHandler">
+        <cas:field name="depDate" type="string" handler="dateHandler1">
             <cas:bind-xml name="depDate" node="element"/>
         </cas:field>
-        <cas:field name="returnDate" type="string" handler="dateHandler">
+        <cas:field name="returnDate" type="string" handler="dateHandler1">
             <cas:bind-xml name="returnDate" node="element"/>
         </cas:field>
-        <cas:field name="createDate" type="string" handler="dateHandler">
-            <cas:bind-xml name="createDate" node="element"/>
+        <cas:field name="createDate" type="string" handler="dateHandler1">
+            <cas:bind-xml name="createDate1" node="element"/>
         </cas:field>
         <cas:field name="arrival" type="by.pvt.module4.model.Airport">
             <cas:bind-xml name="arrival" node="element"/>
@@ -43,4 +43,8 @@
             <cas:bind-xml name="user" node="element"/>
         </cas:field>
     </cas:class>
+    <field-handler name="dateHandler1"
+                   class="by.pvt.module4.common.DateTimeFieldHandler">
+        <param name="date-format" value="yyyy-MM-dd"/>
+    </field-handler>
 </cas:mapping>
