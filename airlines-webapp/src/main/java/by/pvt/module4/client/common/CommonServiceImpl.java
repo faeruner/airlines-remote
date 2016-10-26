@@ -6,6 +6,7 @@ import by.pvt.module4.common.Fact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.ParameterizedType;
@@ -48,7 +49,12 @@ public abstract class CommonServiceImpl<T extends Fact, L extends CommonEntityLi
     }
 
     public void delete(Integer id) {
-        restTemplate.delete(getPath(PROP_REST_DELETE), id);
+        try {
+            restTemplate.delete(getPath(PROP_REST_DELETE), id);
+        } catch (RestClientException e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     public Integer add(T entity) {

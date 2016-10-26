@@ -66,7 +66,7 @@ public class FlightController extends CommonController<Flight> {
                 flight.setReturnDate(DF.parse(paramMap.get(Flight.RETURN_DATE).trim()));
             if (paramMap.containsKey(Flight.CREATE_DATE))
                 flight.setCreateDate(DF.parse(paramMap.get(Flight.CREATE_DATE).trim()));
-            else flight.setCreateDate(new Date());
+            else if (flight.getCreateDate() == null) flight.setCreateDate(new Date());
         } catch (ParseException e) {
             log.error(e);
         }

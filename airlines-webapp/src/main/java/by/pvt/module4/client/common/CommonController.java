@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestClientResponseException;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -124,8 +126,24 @@ public abstract class CommonController<T extends Fact> {
     private String delete(Map<String, String> paramMap, Model model) {
         try {
             commonService.delete(getParamIntDef(paramMap, ID, -1));
-        } catch (Exception e) {
-            handleException(e, model);
+        } catch (RestClientException e) {
+            String s1 = ((RestClientResponseException) e).getResponseBodyAsString();
+            String begTag = "<body><h1>";
+            String endTag = "</h1>";
+            Integer index = s1.indexOf(begTag);
+            if (index > 0) {
+                index += begTag.length();
+                s1 = s1.substring(index);
+                index = s1.indexOf(endTag);
+                if (index > 0) {
+                    s1 = s1.substring(0, index);
+                }
+                log.info(s1);
+                handleException(e, model, s1);
+            } else
+                handleException(e, model);
+        } catch (Exception e1) {
+            handleException(e1, model);
         }
         return fillModelPage(paramMap, model);
     }
@@ -207,11 +225,18 @@ public abstract class CommonController<T extends Fact> {
     }
 
     private void handleException(Exception e, Model model) {
-        e.printStackTrace();
+        handleException(e, model, null);
+    }
+
+    private void handleException(Exception e, Model model, String description) {
+        log.error(e);
         model.addAttribute("show_error", "true");
-        String msg = e.getMessage() + "<br/><br/>";
-        if (e.getCause() != null)
-            msg += e.getCause().getMessage();
-        model.addAttribute("text_error", msg);
+        String br = "<br/><br/>";
+        StringBuilder msg = new StringBuilder(e.getMessage());
+        if (e.getCause() != null && e.getCause().getMessage() != null)
+            msg.append(br).append(e.getCause().getMessage());
+        if (description != null)
+            msg.append(br).append(description);
+        model.addAttribute("text_error", msg.toString());
     }
 }

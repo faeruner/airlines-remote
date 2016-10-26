@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -94,10 +96,20 @@ public abstract class CommonController<T extends Fact, L extends CommonEntityLis
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public void delete(@PathVariable Integer id) {
+    public void delete(@PathVariable Integer id, HttpServletResponse response) {
         log.info("Deleting contact with id: " + id);
         T crew = commonService.findOne(id);
-        commonService.delete(crew);
+        try {
+            commonService.delete(crew);
+        } catch (Exception e) {
+            log.error(e);
+            try {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+            } catch (IOException e1) {
+                log.error(e1);
+            }
+
+        }
         log.info("Entity deleted successfully");
     }
 
