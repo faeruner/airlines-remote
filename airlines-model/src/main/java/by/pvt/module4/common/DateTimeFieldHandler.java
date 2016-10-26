@@ -44,8 +44,8 @@ public class DateTimeFieldHandler extends GeneralizedFieldHandler {
     }
 
     protected static Date parse(final String dateString) {
-        Date date = new Date();
-        if (dateString != null) {
+        Date date = null;
+        if (dateString != null && !dateString.isEmpty()) {
             DateFormat DF = new SimpleDateFormat(dateFormatPattern);
             try {
                 date = DF.parse(dateString);

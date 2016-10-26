@@ -1,5 +1,5 @@
 <cas:mapping xmlns:cas="http://castor.exolab.org/">
-    <description>Mapping Airlines App Entities</description>
+    <cas:description>Mapping Airlines App Entities</cas:description>
     <cas:include href="classpath:mapping/oxm-mapping-airline.xml"/>
     <cas:include href="classpath:mapping/oxm-mapping-airport.xml"/>
     <cas:include href="classpath:mapping/oxm-mapping-userRole.xml"/>

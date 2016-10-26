@@ -56,7 +56,7 @@ public abstract class CommonServiceImpl<T extends Fact, L extends CommonEntityLi
     }
 
     public void update(T entity) {
-        restTemplate.put(PROP_REST_UPDATE, entity, entity.getId());
+        restTemplate.put(getPath(PROP_REST_UPDATE), entity, entity.getId());
     }
 
     public List<T> getAll() {

@@ -5,6 +5,7 @@ import by.pvt.module4.common.Fact;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -48,7 +49,12 @@ public abstract class CommonServiceImpl<T extends Fact> implements CommonService
 
     @Override
     public Page<T> findPage(Pageable page, Boolean full) {
-        return commonRepository.findAll(page);
+        Page<T> resultPage = commonRepository.findAll(page);
+        if (page.getPageNumber() > 0 && resultPage.getTotalPages() < page.getPageNumber() + 1) {
+            page = new PageRequest(page.getPageNumber() - 1, page.getPageSize());
+            resultPage = findPage(page, full);
+        }
+        return resultPage;
     }
 
     @Override

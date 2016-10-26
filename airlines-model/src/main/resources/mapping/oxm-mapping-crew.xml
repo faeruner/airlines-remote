@@ -28,8 +28,8 @@
             <cas:bind-xml name="staffItem" node="element"/>
         </cas:field>
     </cas:class>
-    <field-handler name="dateHandler2"
-                   class="by.pvt.module4.common.DateTimeFieldHandler">
-        <param name="date-format" value="yyyy-MM-dd"/>
-    </field-handler>
+    <cas:field-handler name="dateHandler2"
+                       class="by.pvt.module4.common.DateTimeFieldHandler">
+        <cas:param name="date-format" value="yyyy-MM-dd"/>
+    </cas:field-handler>
 </cas:mapping>
