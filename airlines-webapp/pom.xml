@@ -68,7 +68,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <build>
-        <finalName>airlines-webapp</finalName>
-    </build>
 </project>
